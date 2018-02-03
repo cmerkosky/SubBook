@@ -2,18 +2,14 @@ package com.example.cole.subbook;
 
 import android.util.Log;
 
-/**
- * Created by cole on 29/01/18.
- */
-
-public class Charge extends Object{
+public class Charge{
     private int dollars;
     private int cents;
 
-    public void Charge(int dollars, int cents){
+    Charge(int dollars, int cents){
         this.dollars = dollars;
         if(cents > 99){
-            Log.e("Charge", "Too many cents!")
+            Log.e("Charge", "Too many cents!");
         }
         else {
             this.cents = cents;

@@ -2,11 +2,8 @@ package com.example.cole.subbook;
 
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Date;
-
-/**
- * Created by cole on 29/01/18.
- */
 
 public class Subscription {
     private final static String TAG = "Subscription";
@@ -15,23 +12,43 @@ public class Subscription {
     private Charge charge;
     private String comment;
 
-    public void Subscription(String name, Date date, Charge charge, String comment){
+    Subscription(String name, Date date, Charge charge, String comment){
         this.date = date;
         this.charge = charge;
 
-        if(name.length() >= 20) {
+        if(name.length() <= 20) {
             this.name = name;
         }
         else{
-            Log.e(TAG, "Name to long!");
+            Log.e(TAG, "Name too long!");
         }
 
 
-        if(comment.length() >= 30) {
+        if(comment.length() <= 30) {
             this.comment = comment;
         }
         else{
-            Log.e(TAG, "Comment to long!");
+            Log.e(TAG, "Comment too long!");
+        }
+    }
+
+    Subscription(String name, Charge charge, String comment){
+        this.date = new Date();
+        this.charge = charge;
+
+        if(name.length() <= 20) {
+            this.name = name;
+        }
+        else{
+            Log.e(TAG, "Name too long!");
+        }
+
+
+        if(comment.length() <= 30) {
+            this.comment = comment;
+        }
+        else{
+            Log.e(TAG, "Comment too long!");
         }
     }
 
@@ -43,27 +60,19 @@ public class Subscription {
         return this.date;
     }
 
-    public Charge getCharge() {
-        return this.charge;
-    }
-
-    public String getComment(){
-        return this.comment;
-    }
-
     public void setName(String name){
         this.name = name;
     }
 
-    public void setDate(Date date){
-        this.date = date;
+    public String toString(){
+        return name + " | " + date + " | " + charge + " | " + comment;
     }
 
-    public void setCharge(Charge charge){
-        this.charge = charge;
-    }
+    String getDetails(){
 
-    public void setComment(String comment){
-        this.comment = comment;
+        // TODO: Format in a more appealing way
+        String dateString = date.toString();
+
+        return charge + " | " + dateString + " | " + comment;
     }
 }
