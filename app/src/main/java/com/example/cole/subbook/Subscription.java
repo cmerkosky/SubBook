@@ -42,7 +42,7 @@ public class Subscription {
 
     String getChargeString() { return this.charge.toString(); }
 
-    public String getDateString() { return this.date.toString(); }
+    public Charge getCharge() { return this.charge; }
 
     Date getDate(){
         return this.date;
@@ -66,11 +66,11 @@ public class Subscription {
 
         String dateString = new SimpleDateFormat("YYYY-MM-DD", Locale.CANADA).format(date);
 
-        if (comment!=null) {
-            return "$" + charge + " | " + dateString + " | " + comment;
+        if (comment ==null || comment == "") {
+            return "$" + charge + " | " + dateString;
         }
         else{
-            return "$" + charge + " | " + dateString;
+            return "$" + charge + " | " + dateString + " | " + comment;
         }
     }
 }

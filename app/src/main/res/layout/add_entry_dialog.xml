@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/dialogName"
+        android:id="@+id/dialog_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -23,7 +23,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/dialogComment"
+        android:id="@+id/dialog_comment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -34,10 +34,10 @@
         android:hint="@string/add_comment_prompt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogName" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_name" />
 
     <EditText
-        android:id="@+id/dialogCost"
+        android:id="@+id/dialog_cost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -48,10 +48,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogComment" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_comment" />
 
     <DatePicker
-        android:id="@+id/dialogDate"
+        android:id="@+id/dialog_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogCost" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_cost" />
 
 
 

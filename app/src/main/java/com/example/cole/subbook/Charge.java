@@ -21,4 +21,8 @@ public class Charge{
         if(cents < 10){ return this.dollars + ".0" + this.cents; }
         else { return this.dollars + "." + this.cents; }
     }
+
+    public int getCents() { return this.cents; }
+
+    public int getDollars() { return  this.dollars; }
 }

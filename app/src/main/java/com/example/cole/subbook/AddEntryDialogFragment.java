@@ -10,7 +10,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddEntryDialogFragment extends DialogFragment {
 
@@ -34,10 +33,10 @@ public class AddEntryDialogFragment extends DialogFragment {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = dialog.findViewById(R.id.dialogName);
-                EditText comment = dialog.findViewById(R.id.dialogComment);
-                EditText cost = dialog.findViewById(R.id.dialogCost);
-                DatePicker date = dialog.findViewById(R.id.dialogDate);
+                EditText name = dialog.findViewById(R.id.dialog_name);
+                EditText comment = dialog.findViewById(R.id.dialog_comment);
+                EditText cost = dialog.findViewById(R.id.dialog_cost);
+                DatePicker date = dialog.findViewById(R.id.dialog_date);
 
                 String nameString = name.getText().toString();
                 String commentString = comment.getText().toString();

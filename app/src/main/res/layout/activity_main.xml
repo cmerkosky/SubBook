@@ -7,14 +7,19 @@
     tools:context="com.example.cole.subbook.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/subList"
-        android:scrollbars="vertical"
+        android:id="@+id/sub_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="546dp"
+        android:layout_gravity="center|top"
+        android:scrollbars="vertical"
+        app:layout_anchor="@id/total_view_layout"
+        app:layout_anchorGravity="top|center_horizontal"
+        tools:layout_editor_absoluteY="-2dp">
+
     </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addEntryFAB"
+        android:id="@+id/add_entry_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -22,8 +27,35 @@
         android:src="@drawable/ic_action_name"
         app:elevation="5dp"
         app:fabSize="normal"
-        app:layout_anchor="@id/subList"
-        app:layout_anchorGravity="bottom|right|end">
+        app:layout_anchor="@id/total_view_layout"
+        app:layout_anchorGravity="right|end">
+
     </android.support.design.widget.FloatingActionButton>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/total_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <!--app:layout_anchorGravity="bottom|center">-->
+
+        <TextView
+            android:id="@+id/total_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.design.widget.CoordinatorLayout>
