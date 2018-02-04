@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -12,13 +13,13 @@ import android.widget.EditText;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddEntryDialogFragment extends DialogFragment {
+
+public class EditEntryDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        return new AlertDialog.Builder(getActivity()).setTitle("Add an entry...")
-                .setView(View.inflate(getContext(), R.layout.add_entry_dialog, null))
+        return new AlertDialog.Builder(getActivity()).setTitle("Edit an entry...")
+                .setView(View.inflate(getContext(), R.layout.edit_entry_dialog, null))
                 .setPositiveButton("Save", null)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -26,18 +27,33 @@ public class AddEntryDialogFragment extends DialogFragment {
                 .create();
     }
 
-    @Override
     public void onStart(){
         super.onStart();
         final AlertDialog dialog = (AlertDialog) this.getDialog();
 
+        final MainActivity activity = (MainActivity) getActivity();
+        Subscription subscription = ((MainActivity) getActivity()).getSubToEdit();
+
+        final EditText name = dialog.findViewById(R.id.edit_name);
+        final EditText comment = dialog.findViewById(R.id.edit_comment);
+        final EditText cost = dialog.findViewById(R.id.edit_cost);
+        final DatePicker date = dialog.findViewById(R.id.edit_date);
+
+        name.setText(subscription.getName());
+        comment.setText(subscription.getComment());
+        cost.setText(subscription.getChargeString());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(subscription.getDate());
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        date.updateDate(year, month, day);
+
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = dialog.findViewById(R.id.dialogName);
-                EditText comment = dialog.findViewById(R.id.dialogComment);
-                EditText cost = dialog.findViewById(R.id.dialogCost);
-                DatePicker date = dialog.findViewById(R.id.dialogDate);
 
                 String nameString = name.getText().toString();
                 String commentString = comment.getText().toString();
@@ -69,11 +85,9 @@ public class AddEntryDialogFragment extends DialogFragment {
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(year, month, day);
 
-                    Subscription subscription = new Subscription(name.getText().toString(),
-                            calendar.getTime(), new Charge(dollars, cents), comment.getText().toString());
+                    activity.editSubscription(activity.getSubToEdit(), nameString, commentString,
+                            new Charge(dollars, cents), calendar.getTime());
 
-                    MainActivity activity = (MainActivity) getActivity();
-                    activity.addSubscription(subscription);
                     dialog.dismiss();
                 }
             }

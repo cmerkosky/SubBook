@@ -2,8 +2,10 @@ package com.example.cole.subbook;
 
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Subscription {
     private final static String TAG = "Subscription";
@@ -32,31 +34,17 @@ public class Subscription {
         }
     }
 
-    Subscription(String name, Charge charge, String comment){
-        this.date = new Date();
-        this.charge = charge;
-
-        if(name.length() <= 20) {
-            this.name = name;
-        }
-        else{
-            Log.e(TAG, "Name too long!");
-        }
-
-
-        if(comment.length() <= 30) {
-            this.comment = comment;
-        }
-        else{
-            Log.e(TAG, "Comment too long!");
-        }
-    }
-
     public String getName(){
         return this.name;
     }
 
-    public Date getDate(){
+    String getComment() { return this.comment; }
+
+    String getChargeString() { return this.charge.toString(); }
+
+    public String getDateString() { return this.date.toString(); }
+
+    Date getDate(){
         return this.date;
     }
 
@@ -64,15 +52,25 @@ public class Subscription {
         this.name = name;
     }
 
+    void setComment(String comment) { this.comment = comment; }
+
+    void setCharge(Charge charge) { this.charge = charge; }
+
+    void setDate(Date date) { this.date = date; }
+
     public String toString(){
         return name + " | " + date + " | " + charge + " | " + comment;
     }
 
     String getDetails(){
 
-        // TODO: Format in a more appealing way
-        String dateString = date.toString();
+        String dateString = new SimpleDateFormat("YYYY-MM-DD", Locale.CANADA).format(date);
 
-        return charge + " | " + dateString + " | " + comment;
+        if (comment!=null) {
+            return "$" + charge + " | " + dateString + " | " + comment;
+        }
+        else{
+            return "$" + charge + " | " + dateString;
+        }
     }
 }

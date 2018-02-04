@@ -15,9 +15,10 @@ public class Charge{
             this.cents = cents;
         }
     }
-     @Override
+
+    @Override
     public String toString(){
-        if(cents < 10){ return "$" + this.dollars + ".0" + this.cents; }
-        else { return "$" + this.dollars + "." + this.cents; }
+        if(cents < 10){ return this.dollars + ".0" + this.cents; }
+        else { return this.dollars + "." + this.cents; }
     }
 }

@@ -3,4 +3,7 @@
     <string name="add_name_prompt">Name</string>
     <string name="add_comment_prompt">Comment</string>
     <string name="add_charge_prompt">Cost</string>
+    <string name="add_date_prompt">Date</string>
+    <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
 </resources>
