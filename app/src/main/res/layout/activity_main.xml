@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.cole.subbook.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/sub_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="546dp"
-        android:layout_gravity="center|top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layout_anchor="@id/total_view_layout"
         app:layout_anchorGravity="top|center_horizontal"
-        tools:layout_editor_absoluteY="-2dp">
+        app:layout_constraintBottom_toTopOf="@+id/total_view_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="546dp"
+        tools:layout_conversion_absoluteWidth="411dp">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -22,40 +27,51 @@
         android:id="@+id/add_entry_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
         android:clickable="true"
         android:src="@drawable/ic_action_name"
         app:elevation="5dp"
         app:fabSize="normal"
         app:layout_anchor="@id/total_view_layout"
-        app:layout_anchorGravity="right|end">
+        app:layout_anchorGravity="right|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_conversion_absoluteHeight="56dp"
+        tools:layout_conversion_absoluteWidth="56dp">
 
     </android.support.design.widget.FloatingActionButton>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/total_view_layout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        app:layout_behavior="@string/bottom_sheet_behavior">
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_conversion_absoluteHeight="59dp"
+        tools:layout_conversion_absoluteWidth="411dp">
 
         <!--app:layout_anchorGravity="bottom|center">-->
 
         <TextView
             android:id="@+id/total_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="27dp"
+            tools:layout_conversion_absoluteWidth="379dp" />
 
     </android.support.constraint.ConstraintLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

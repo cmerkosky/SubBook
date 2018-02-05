@@ -64,7 +64,7 @@ public class Subscription {
 
     public String getDetails(){
 
-        String dateString = new SimpleDateFormat("YYYY-MM-DD", Locale.CANADA).format(this.date);
+        String dateString = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA).format(this.date);
 
         if (this.comment == null || this.comment.equals("")) {
             return "$" + this.charge + " | " + dateString;
