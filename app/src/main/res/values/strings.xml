@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SubBook</string>
+    <string name="app_name">cjmerkos-SubBook</string>
     <string name="add_name_prompt">Name</string>
     <string name="add_comment_prompt">Comment (Optional)</string>
     <string name="add_charge_prompt">Cost</string>

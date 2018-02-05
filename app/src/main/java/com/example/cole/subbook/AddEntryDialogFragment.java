@@ -11,8 +11,17 @@ import android.widget.EditText;
 
 import java.util.Calendar;
 
+/**
+ * The DialogFragment for the "Add Entry" dialog - as per the Android spec, it is better to use
+ * DialogFragments rather than dialogs themselves.
+ */
 public class AddEntryDialogFragment extends DialogFragment {
 
+    /**
+     * Initializes the dialog fragment and specifies the layout
+     * @param savedInstanceState Saved instance of the calling function
+     * @return a Dialog to display
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -25,6 +34,9 @@ public class AddEntryDialogFragment extends DialogFragment {
                 .create();
     }
 
+    /**
+     * Sets the button actions - ensures proper input
+     */
     @Override
     public void onStart(){
         super.onStart();

@@ -28,6 +28,9 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * The main activity that this app will run.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private final static String FILENAME = "subscriptions.sav";
@@ -39,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private Charge currentTotal;
     private Resources res;
 
+    /**
+     * Called when this activity is created
+     * @param savedInstanceState A saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         totalView = findViewById(R.id.total_view);
     }
 
+    /**
+     * Called when this activity is started
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -77,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         subListView.setAdapter(adapter);
     }
 
+    /**
+     * Displays the "Add Entry" dialog
+     */
     void showAddEntryDialog() {
         FragmentManager fm = getFragmentManager();
 
@@ -84,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
         dialog.show(fm, "showAddEntryDialog");
     }
 
+    /**
+     * Displays the "Edit Entry" dialog
+     * @param subToEdit The subscription to be edited
+     */
     void showEditEntryDialog(Subscription subToEdit) {
         FragmentManager fm = getFragmentManager();
 
@@ -93,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
         dialog.show(fm, "showEditEntryDialog");
     }
 
+    /**
+     * Adds a subscription to the list
+     * @param subscription The subscription to add
+     */
     public void addSubscription(Subscription subscription) {
         subList.add(subscription);
 
@@ -103,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Edits a subscription currently in the list
+     * @param subscription The subscription to edit
+     * @param name The name to update the subscription with.
+     * @param comment The comment to update the subscription with.
+     * @param charge The charge to update the subscription with.
+     * @param date The date to update the subscription with
+     */
     public void editSubscription(Subscription subscription, String name, String comment, Charge charge, Date date){
         subscription.setName(name);
         subscription.setComment(comment);
@@ -116,6 +145,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Removes a subscription from the list
+     * @param subscription The subscription to remove
+     */
     public void removeSubscription(Subscription subscription) {
         subList.remove(subscription);
         recalculateTotal();
@@ -125,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Recalculates the current total monthly charge
+     */
     private void recalculateTotal(){
         int cents = 0;
         int dollars = 0;
@@ -140,8 +176,15 @@ public class MainActivity extends AppCompatActivity {
         currentTotal = new Charge(dollars, cents);
     }
 
+    /**
+     * Returns the currently specified subscription to be edited
+     * @return currently held subscription to be edited
+     */
     public Subscription getSubToEdit(){ return this.subToEdit; }
 
+    /**
+     * Saves the subscription list to a GSON file
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -159,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Loads the subscription list from a GSON file
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);

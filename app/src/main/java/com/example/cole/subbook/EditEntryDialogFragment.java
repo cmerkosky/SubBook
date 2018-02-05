@@ -13,9 +13,17 @@ import android.widget.EditText;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * The DialogFragment for the "Edit Entry" dialog - as per the Android spec, it is better to use
+ * DialogFragments rather than dialogs themselves.
+ */
 public class EditEntryDialogFragment extends DialogFragment {
 
+    /**
+     * Initializes the dialog fragment and specifies the layout
+     * @param savedInstanceState Saved instance of the calling function
+     * @return a Dialog to display
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity()).setTitle("Edit an entry...")
@@ -27,6 +35,9 @@ public class EditEntryDialogFragment extends DialogFragment {
                 .create();
     }
 
+    /**
+     * Sets the button actions - ensures proper input
+     */
     public void onStart(){
         super.onStart();
         final AlertDialog dialog = (AlertDialog) this.getDialog();
