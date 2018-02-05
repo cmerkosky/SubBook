@@ -38,6 +38,7 @@ public class EditEntryDialogFragment extends DialogFragment {
     /**
      * Sets the button actions - ensures proper input
      */
+    @Override
     public void onStart(){
         super.onStart();
         final AlertDialog dialog = (AlertDialog) this.getDialog();

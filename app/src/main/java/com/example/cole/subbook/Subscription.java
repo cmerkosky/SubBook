@@ -3,7 +3,7 @@ package com.example.cole.subbook;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.Locale;
 
@@ -11,7 +11,6 @@ import java.util.Locale;
  * A representation of Subscription
  */
 public class Subscription {
-    private final static String TAG = "Subscription";
     private String name;
     private Date date;
     private Charge charge;
@@ -32,7 +31,7 @@ public class Subscription {
             this.name = name;
         }
         else{
-            Log.e(TAG, "Name too long!");
+            Log.e("Subscription", "Name too long!");
         }
 
 
@@ -40,7 +39,7 @@ public class Subscription {
             this.comment = comment;
         }
         else{
-            Log.e(TAG, "Comment too long!");
+            Log.e("Subscription", "Comment too long!");
         }
     }
 
