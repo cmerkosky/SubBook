@@ -6,7 +6,7 @@ public class Charge{
     private int dollars;
     private int cents;
 
-    Charge(int dollars, int cents){
+    public Charge(int dollars, int cents){
         this.dollars = dollars;
         if(cents > 99){
             Log.e("Charge", "Too many cents!");

@@ -2,6 +2,7 @@ package com.example.cole.subbook;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.res.Resources;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
-//public class MainActivity extends AppCompatActivity implements AddEntryDialogFragment.AddEntryDialogListener{
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 public class MainActivity extends AppCompatActivity {
 
+    private final static String FILENAME = "subscriptions.sav";
     private RecyclerView subListView;
     private SubAdapter adapter;
     private ArrayList<Subscription> subList;
@@ -52,23 +65,16 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "On start called!");
 
         // TODO: Load from file
-        subList = new ArrayList<>();
+        loadFromFile();
 
         res = getResources();
         currentTotal = new Charge(0,0);
+
+        recalculateTotal();
+        totalView.setText(res.getString(R.string.total_string, currentTotal.toString()));
+
         adapter = new SubAdapter(subList);
         subListView.setAdapter(adapter);
-
-        addSubscription(new Subscription("Netflix", new Date(), new Charge(8, 99), "For dem flix."));
-        addSubscription(new Subscription("Rugby", new Date(), new Charge(5, 65), ""));
-        addSubscription(new Subscription("Water", new Date(), new Charge(5, 65), "For dat flush"));
-        addSubscription(new Subscription("Electric", new Date(), new Charge(5, 65), "For dat zap"));
-        addSubscription(new Subscription("Heating", new Date(), new Charge(5, 65), "For dat toast"));
-        addSubscription(new Subscription("Rent", new Date(), new Charge(5, 65), "For dat roof"));
-        addSubscription(new Subscription("Groceries", new Date(), new Charge(5, 65), "For dat food"));
-        addSubscription(new Subscription("Phone", new Date(), new Charge(5, 65), "For dat ring"));
-        addSubscription(new Subscription("Google Play", new Date(), new Charge(5, 65), "For dem tunes"));
-
     }
 
     void showAddEntryDialog() {
@@ -91,10 +97,9 @@ public class MainActivity extends AppCompatActivity {
         subList.add(subscription);
 
         recalculateTotal();
-        Log.i("Subscription", subscription.toString());
-        Log.i("Subscription",  currentTotal.toString());
         totalView.setText(res.getString(R.string.total_string, currentTotal.toString()));
-        Log.i("Subscription", "Made it through");
+
+        saveInFile();
         adapter.notifyDataSetChanged();
     }
 
@@ -106,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         recalculateTotal();
         totalView.setText(res.getString(R.string.total_string, currentTotal.toString()));
+
+        saveInFile();
         adapter.notifyDataSetChanged();
     }
 
@@ -113,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
         subList.remove(subscription);
         recalculateTotal();
         totalView.setText(res.getString(R.string.total_string, currentTotal.toString()));
+
+        saveInFile();
         adapter.notifyDataSetChanged();
     }
-
-    public Subscription getSubToEdit(){ return this.subToEdit; }
 
     private void recalculateTotal(){
         int cents = 0;
@@ -132,4 +139,43 @@ public class MainActivity extends AppCompatActivity {
         }
         currentTotal = new Charge(dollars, cents);
     }
+
+    public Subscription getSubToEdit(){ return this.subToEdit; }
+
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+
+            Gson gson = new Gson();
+            gson.toJson(subList, out);
+            out.flush();
+
+            fos.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
+
+            subList = gson.fromJson(in, listType);
+
+            fis.close();
+
+        } catch (FileNotFoundException e) {
+            subList = new ArrayList<>();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
+
 }

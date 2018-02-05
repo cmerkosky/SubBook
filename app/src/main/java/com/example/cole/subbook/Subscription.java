@@ -38,13 +38,13 @@ public class Subscription {
         return this.name;
     }
 
-    String getComment() { return this.comment; }
+    public String getComment() { return this.comment; }
 
-    String getChargeString() { return this.charge.toString(); }
+    public String getChargeString() { return this.charge.toString(); }
 
     public Charge getCharge() { return this.charge; }
 
-    Date getDate(){
+    public Date getDate(){
         return this.date;
     }
 
@@ -52,25 +52,25 @@ public class Subscription {
         this.name = name;
     }
 
-    void setComment(String comment) { this.comment = comment; }
+    public void setComment(String comment) { this.comment = comment; }
 
-    void setCharge(Charge charge) { this.charge = charge; }
+    public void setCharge(Charge charge) { this.charge = charge; }
 
-    void setDate(Date date) { this.date = date; }
+    public void setDate(Date date) { this.date = date; }
 
     public String toString(){
         return name + " | " + date + " | " + charge + " | " + comment;
     }
 
-    String getDetails(){
+    public String getDetails(){
 
-        String dateString = new SimpleDateFormat("YYYY-MM-DD", Locale.CANADA).format(date);
+        String dateString = new SimpleDateFormat("YYYY-MM-DD", Locale.CANADA).format(this.date);
 
-        if (comment ==null || comment == "") {
-            return "$" + charge + " | " + dateString;
+        if (this.comment == null || this.comment.equals("")) {
+            return "$" + this.charge + " | " + dateString;
         }
         else{
-            return "$" + charge + " | " + dateString + " | " + comment;
+            return "$" + this.charge + " | " + dateString + " | " + this.comment;
         }
     }
 }
